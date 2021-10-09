@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid shadow p-5">
+<h1 class="text-center">Details Of Library Book</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">book_id</th>
+			<th scope="col">book_name</th>
+			<th scope="col">author_name</th>
+			<th scope="col">student_name</th>
+			<th scope="col">student_rollno</th>
+			<th scope="col">borrow_date</th>
+			<th scope="col">due_date</th>
+			<th scope="col">Action</th>
+		</tr>
+	</thead>
+<tbody>
+	{% for libraryinfo in books %}
+	<tr class="table-info">
+		<td>{{libraryinfo.book_id}}</td>
+		<td>{{libraryinfo.book_name}}</td>
+		<td>{{libraryinfo.author_name}}</td>
+		<td>{{libraryinfo.student_name}}</td>
+		<td>{{libraryinfo.student_roll_no}}</td>
+		<td>{{libraryinfo.borrow_date}}</td>
+		<td>{{libraryinfo.due_date}}</td>
+
+		<td>
+			<a href="{% url 'library_edit' libraryinfo.id %}" class="btn btn-warning">
+				<i class="far fa-edit fa-lg"></i></a>
+			<form action="{% url 'library_trash' libraryinfo.id %}" method='POST' class="d-inline">{% csrf_token %}
+				<button type="submit" class="btn">
+					<i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+				</button></form>
+			</td>
+
+		
+
+
+	</tr>
+
+
+	{% endfor %}
+			
+</tbody>
+</table>
+
+	</div>
+
+
+{% endblock content %}
